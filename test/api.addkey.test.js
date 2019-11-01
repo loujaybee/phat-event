@@ -33,23 +33,4 @@ describe('Public API', () => {
             key2: 'value',
         });
     });
-
-    test('Will sanitise a specified key path', () => {
-
-        phatEvent
-            .addKey('test', {
-                'username': 'lou',
-                'password': "supersecret"
-            })
-            .sanitise("test.password")
-
-        phatEvent.emit();
-
-        expect(mockLog).toHaveBeenCalledWith({
-            test: {
-                username: 'lou',
-                password: "XXXXXXXXXX"
-            }
-        });
-    });
 });
