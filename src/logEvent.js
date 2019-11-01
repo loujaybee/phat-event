@@ -12,15 +12,6 @@ class LogEvent {
         logger = log;
     }
 
-    emit() {
-        logger(event);
-        return this;
-    }
-
-    __reset() {
-        event = {};
-    }
-
     addKey(prop, value) {
         const [first, second] = prop.split('.');
 
@@ -32,6 +23,15 @@ class LogEvent {
         }
 
         return this;
+    }
+
+    emit() {
+        logger(event);
+        return this;
+    }
+
+    __reset() {
+        event = {};
     }
 }
 
