@@ -11,11 +11,13 @@ And large events allow for easier cross analysis across data points.
 
 Rather than this:
 
-`{ "timestamp": "X", "message": "Something" }`
+```javascript
+{ "timestamp": "X", "message": "Something" }
+```
 
 You have this:
 
-```
+```javascript
 {
     "timestamp": "X",
     "step1": {
