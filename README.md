@@ -1,13 +1,13 @@
 
 **PLEASE NOTE** Phat-event is a beta library, currently under development.
 
-## What is it?
+## Phat Event
 
 phat-event is a JavaScript-based library designed for easier creation of "phat", one-per-service log events.
 
 phat-event works well in serverless environments.
 
-## Why?
+## Motivation
 
 There are no (that I'm aware of) opinionated log event construction libraries.
 
@@ -18,6 +18,8 @@ phat-event is not a logging library. The library takes a configuration function 
 Phat event is primarily for the _opinionated_ construction of a fat single log line entry, it is not for the act of logging.
 
 ## Getting Started
+
+Install: `npm install phat-event`
 
 ```javascript
 const phatEvent = require("phat-event");
