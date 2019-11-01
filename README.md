@@ -1,13 +1,39 @@
 
+**PLEASE NOTE** Phat-event is a beta library, currently under development.
+
 ## What is it?
 
-Phat event is a JavaScript based library designed for the creation of log events.
+phat-event is a JavaScript-based library designed for easier creation of "phat", one-per-service log events.
 
-A log event is a structured log, that is updated throughout the lifecycle of a service.
+phat-event works well in serverless environments.
 
-At the end of the services life, the event is emitted.
+## Why?
 
-And large events allow for easier cross analysis across data points.
+There are no (that I'm aware of) opinionated log event construction libraries.
+
+## What's the difference between this and Winston, Bunyan, X
+
+phat-event is not a logging library. The library takes a configuration function which is called with the constructed event.
+
+Phat event is primarily for the _opinionated_ construction of a fat single log line entry, it is not for the act of logging.
+
+## Getting Started
+
+```javascript
+const phatEvent = require("phat-event");
+
+phatEvent.configure({ log: console.log })
+
+phatEvent
+    .addKey('key', true)
+
+phatEvent
+    .emit();
+```
+
+## What is a log event?
+
+A log event is a form of structured log, that is updated throughout the lifecycle of a service and a single structured event is emitted at the end of the service.
 
 Rather than this:
 
@@ -31,20 +57,66 @@ You have this:
 }
  ```
 
-## Why?
+## The difficulty with log events
 
-The motivation was to have some sort of opinionated logger that is designed to push items into a log event object.
+But log events have downsides.
 
-## Where does the name come from? Well
+* If the service fails unexpectedly, the event might not be emitted.
+* Each emitted property is not timestamped by default
+* Poor naming of properties makes it harder to understand property meanings
+* There is no "standard" way to structure these fat log events
 
-Naming things is hard.
+## Why log events > individual structure logs
 
-And "event emitter" or similiar isn't noteworth enough.
+Log events allow you to analyse across datapoints without clever tooling that rolls up based on a log property, such as a correlation ID.
 
-So basically...
+## Singleton Implementation
 
-Essentially from [this tweet thread comment](https://twitter.com/mipsytipsy/status/1042978722645569537).
+At the time of writing, phat-event supports only singletons. Which means that no references to log functions need to be passed around. It does however mean that the event object is mutable, rendering it unsuitable for projects that have many NodeJS processes running with shared memory. Such as an express server with multiple endpoints. It is however well suited to tools like lambda functions that do not share memory. This may change in future iterations.
 
-## Getting Started
+## API
 
-Coming Soon...
+Documentation for the public API of phat-event.
+
+### .configure({ log })
+
+The configure method takes an object of configuration properties, such as:
+
+* `log` — The method that is called when the `emit` event is triggered.
+
+### .addKey(String, Any)
+
+Adds a key and value to the event object.
+
+Nested properties can be passed by using dot delimiters between keys `prop.prop.prop`.
+
+### .sanitise(String)
+
+Convers
+
+### .emit()
+
+Invokes the configured `log` method and applies the event as the first argument.
+
+This method allows the log entry to be emitted at the end of service processing.
+
+## Releases
+
+### 1.1.1
+
+* Bugfix to allow `.sanitise` to access deeply nested properties.
+
+### 1.1.0
+
+* Implements `.sanitise`
+    * A helper method which implements method to block out large or sensitive properties.
+
+### 1.0.0
+
+* Implements `push` method
+
+## Where does the name come from?
+
+Naming things is hard. And something dry like "event emitter" or similiar isn't noteworthy enough.
+
+As a topic discussed heavily by Charity Majors, I stole the name from her tweet thread: [this tweet thread comment](https://twitter.com/mipsytipsy/status/1042978722645569537) where she refers to the event objects as "phat", which made me laugh and is now the name of this library.
