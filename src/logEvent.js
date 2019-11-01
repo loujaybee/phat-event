@@ -1,9 +1,15 @@
 let event;
-const logger = require("./logger");
+let logger;
 
 class LogEvent {
     constructor() {
-        this.reset();
+        this.__reset();
+    }
+
+    configure({ log }) {
+
+        // TODO RENAME LOG
+        logger = log;
     }
 
     emit() {
@@ -11,11 +17,11 @@ class LogEvent {
         return this;
     }
 
-    reset() {
+    __reset() {
         event = {};
     }
 
-    push(prop, value) {
+    addKey(prop, value) {
         const [first, second] = prop.split('.');
 
         if (first && second) {
