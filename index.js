@@ -27,8 +27,19 @@ class LogEvent {
     }
 
     sanitise(path) {
-        const [first, second] = path.split('.');
-        event[first][second] = sanitiseString;
+        const [first, second, third, fourth] = path.split('.');
+
+        if (first && second && third && fourth) {
+            event[first][second][third][fourth] = sanitiseString;
+        } else if (first && second && third) {
+            event[first][second][third] = sanitiseString;
+        } else if (first && second) {
+            event[first][second] = sanitiseString;
+        } else {
+            event[first] = sanitiseString;
+        }
+
+        return this;
     }
 
     emit() {

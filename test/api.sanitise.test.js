@@ -8,7 +8,7 @@ describe('Public API', () => {
         phatEvent.__reset();
     });
 
-    test('Will sanitise a specified key path', () => {
+    test('Will sanitise a one level key path', () => {
 
         phatEvent
             .addKey('test', {
@@ -16,13 +16,32 @@ describe('Public API', () => {
                 'password': "supersecret"
             })
             .sanitise("test.password")
-
-        phatEvent.emit();
+            .emit();
 
         expect(mockLog).toHaveBeenCalledWith({
             test: {
                 username: 'lou',
                 password: "XXXXXXXXXX"
+            }
+        });
+    });
+
+    test('Will sanitise a two level key path', () => {
+
+        phatEvent
+            .addKey('layerOne.layerTwo', {
+                'username': 'lou',
+                'password': "supersecret"
+            })
+            .sanitise("layerOne.layerTwo.password")
+            .emit();
+
+        expect(mockLog).toHaveBeenCalledWith({
+            layerOne: {
+                layerTwo: {
+                    username: 'lou',
+                    password: "XXXXXXXXXX"
+                }
             }
         });
     });
