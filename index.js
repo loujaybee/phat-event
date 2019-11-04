@@ -52,4 +52,4 @@ class LogEvent {
     }
 }
 
-module.exports = new LogEvent();
+module.exports = LogEvent

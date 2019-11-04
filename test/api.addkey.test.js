@@ -1,5 +1,6 @@
 
-const phatEvent = require('../index');
+const PhatEvent = require('../index');
+const phatEvent = new PhatEvent();
 const mockLog = jest.fn();
 
 describe('Public API', () => {

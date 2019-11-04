@@ -22,7 +22,9 @@ Phat event is primarily for the _opinionated_ construction of a fat single log l
 Install: `npm install phat-event`
 
 ```javascript
-const phatEvent = require("phat-event");
+const PhatEvent = require("phat-event");
+const phatEvent = new PhatEvent();
+const mockLog = jest.fn();
 
 phatEvent.configure({ log: console.log })
 
@@ -72,10 +74,6 @@ But log events have downsides.
 
 Log events allow you to analyse across datapoints without clever tooling that rolls up based on a log property, such as a correlation ID.
 
-## Singleton Implementation
-
-At the time of writing, phat-event supports only singletons. Which means that no references to log functions need to be passed around. It does however mean that the event object is mutable, rendering it unsuitable for projects that have many NodeJS processes running with shared memory. Such as an express server with multiple endpoints. It is however well suited to tools like lambda functions that do not share memory. This may change in future iterations.
-
 ## API
 
 Documentation for the public API of phat-event.
@@ -103,6 +101,10 @@ Invokes the configured `log` method and applies the event as the first argument.
 This method allows the log entry to be emitted at the end of service processing.
 
 ## Releases
+
+### 1.1.2
+
+* Return the constructor, rather than the object instance
 
 ### 1.1.1
 
