@@ -24,7 +24,6 @@ Install: `npm install phat-event`
 ```javascript
 const PhatEvent = require("phat-event");
 const phatEvent = new PhatEvent();
-const mockLog = jest.fn();
 
 phatEvent.configure({ log: console.log })
 
