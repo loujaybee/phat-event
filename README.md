@@ -1,11 +1,6 @@
-
 **PLEASE NOTE** Phat-event is a beta library, currently under development.
 
-## Phat Event
-
-phat-event is a JavaScript-based library designed for easier creation of "phat", one-per-service log events.
-
-phat-event works well in serverless environments.
+Opinionated helper library fr constructing one-per-service log events.
 
 ## Motivation
 
