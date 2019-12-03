@@ -13,6 +13,27 @@ Phat events solves this and gives the following advantages...
 * Easier to read in log files (one emit per service request)
 * Opinionated structure (less endless debates about log structure)
 
+So that this:
+
+```javascript
+{ level: 'INFO', message: 'Started Lambda' }
+{ level: 'INFO', message: 'Calling /user' }
+{ level: 'INFO', message: 'User recieved' }
+{ level: 'INFO', message: 'Getting user ID' }
+{ level: 'INFO', message: 'Responding to Lambda' }
+```
+
+Becomes this:
+
+```javascript
+{
+    level: 'INFO',
+    started: true,
+    steps: [ { name: 'Called user', success: true } ],
+    responded: true
+}
+```
+
 ## Getting Started
 
 Install: `npm install phat-event`
