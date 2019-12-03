@@ -9,7 +9,14 @@ phat-event works well in serverless environments.
 
 ## Motivation
 
-There are no (that I'm aware of) opinionated log event construction libraries.
+There are many disadvantages of logging across many log lines. 
+
+Phat events solves this and gives the following advantages...
+
+* Easily to correlate data (Do users in X region correlate with an integration failure)
+* Less log data (one emit per service request)
+* Easier to read in log files (one emit per service request)
+* Opinionated structure (less endless debates about log structure)
 
 ## What's the difference between this and Winston, Bunyan, X
 
