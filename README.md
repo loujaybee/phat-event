@@ -13,12 +13,6 @@ Phat events solves this and gives the following advantages...
 * Easier to read in log files (one emit per service request)
 * Opinionated structure (less endless debates about log structure)
 
-## What's the difference between this and Winston, Bunyan, X
-
-phat-event is not a logging library. The library takes a configuration function which is called with the constructed event.
-
-Phat event is primarily for the _opinionated_ construction of a fat single log line entry, it is not for the act of logging.
-
 ## Getting Started
 
 Install: `npm install phat-event`
@@ -71,9 +65,9 @@ But log events have downsides.
 * Poor naming of properties makes it harder to understand property meanings
 * There is no "standard" way to structure these fat log events
 
-## Why log events > individual structure logs
+## What's the difference between phat-event and Winston, Bunyan, etc
 
-Log events allow you to analyse across datapoints without clever tooling that rolls up based on a log property, such as a correlation ID.
+phat-event is not a logging library. Phat event is primarily for the _opinionated_ construction of a fat single log line entry, it is not for the act of logging, you decide the logger you want to use. 
 
 ## API
 
