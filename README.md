@@ -1,6 +1,6 @@
 **PLEASE NOTE** Phat-event is a beta library, currently under development.
 
-Opinionated helper library fr constructing one-per-service log events.
+Opinionated helper library for constructing one-per-service log events.
 
 ## Motivation
 
